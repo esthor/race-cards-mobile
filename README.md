@@ -33,4 +33,6 @@ Start the bundler (it needs to remain running whenever you are running the app)
 
 `yarn start` or `npm start`
 
+Then build android:
+
 `yarn android` or `npm android`
