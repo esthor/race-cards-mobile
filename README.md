@@ -15,24 +15,26 @@ If you need have any questions, feel uncertain about anything in the setup, just
 
 After your environment is setup, run these commands to build the app (from the root folder):
 
+`yarn install`
+
 #### iOS (mac only)
 
 `cd ios && pod install`
 
 Then start the bundler (it needs to remain running whenever you are running the app)
 
-`yarn start` or `npm start`
+`yarn start`
 
 Then build ios:
 
-`yarn ios` or `npm ios`
+`yarn ios`
 
 #### Android
 
 Start the bundler (it needs to remain running whenever you are running the app)
 
-`yarn start` or `npm start`
+`yarn start`
 
 Then build android:
 
-`yarn android` or `npm android`
+`yarn android`
