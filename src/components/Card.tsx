@@ -1,8 +1,9 @@
-import * as React from "react";
-import { Dimensions, Image, ImageStyle, StyleSheet } from "react-native";
-import Animated from "react-native-reanimated";
+import * as React from 'react';
+import { Dimensions, Image, ImageStyle, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
+import * as cardAssets from '@@assets/cards';
 
-import StyleGuide from "./StyleGuide";
+import StyleGuide from './StyleGuide';
 
 type CardId = number;
 interface Card {
@@ -13,19 +14,19 @@ interface Card {
 export const cards: Card[] = [
   {
     id: 0,
-    source: require("../assets/examples/card1.png"),
+    source: cardAssets.one,
   },
   {
     id: 1,
-    source: require("../assets/examples/card2.png"),
+    source: cardAssets.one,
   },
   {
     id: 2,
-    source: require("../assets/examples/card3.png"),
+    source: cardAssets.one,
   },
 ];
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 const CARD_ASPECT_RATIO = 1324 / 863;
 export const CARD_WIDTH = width - StyleGuide.spacing * 8;
 export const CARD_HEIGHT = CARD_WIDTH / CARD_ASPECT_RATIO;
@@ -38,11 +39,11 @@ const styles = StyleSheet.create({
   },
   flexibleContainer: {
     flex: 1,
-    maxWidth: "100%",
+    maxWidth: '100%',
     aspectRatio: CARD_ASPECT_RATIO,
     margin: StyleGuide.spacing,
     borderRadius: 18,
-    resizeMode: "contain",
+    resizeMode: 'contain',
   },
 });
 

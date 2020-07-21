@@ -8,7 +8,8 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import WelcomeScreen from '@@screens/Welcome';
 import Swipe from '@@screens/Swipe';
-import * as color from '@@utils/color';
+import StyleGuide from '@@utils/styleguide';
+import DrawerButton from '@@components/nav/DrawerButton';
 
 const InstructionsScreen = () => {
   return (
@@ -39,7 +40,23 @@ const Drawer = createDrawerNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator
+        initialRouteName="Home"
+        // style={styles.container}
+        screenOptions={{
+          gestureEnabled: true,
+          // headerLeft: () => (
+          //   <DrawerButton onPress={() => navigation.toggleDrawer()} />
+          // ),
+        }}
+        drawerContentOptions={{
+          activeTintColor: StyleGuide.colors.brandDark,
+          activeBackgroundColor: StyleGuide.colors.backgroundLight,
+          inactiveTintColor: StyleGuide.colors.backgroundLight,
+
+          itemStyle: { marginVertical: 1 },
+          style: styles.container,
+        }}>
         <Drawer.Screen name="Welcome" component={WelcomeScreen} />
         <Drawer.Screen name="Play Race Cards!" component={Swipe} />
         <Drawer.Screen name="Instructions" component={InstructionsScreen} />
@@ -52,10 +69,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: color.background,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // flex: 1,
+    backgroundColor: StyleGuide.colors.backgroundDark,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
 });
 

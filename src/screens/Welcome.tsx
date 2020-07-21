@@ -8,13 +8,16 @@ import {
 } from 'react-native';
 
 import StyleGuide from '@@utils/styleguide';
+import DrawerButton from '@@components/nav/DrawerButton';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <TouchableOpacity
+        style={styles.header}
+        onPress={() => navigation.openDrawer()}>
         <Text style={styles.headerText}>{'<- Swipe here to navigate'}</Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.contentContainer}>
         <Text style={styles.welcomeText}>Welcome to</Text>
         <Text style={styles.welcomeText}>Race Cards!</Text>
@@ -38,7 +41,7 @@ const WelcomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: StyleGuide.colors.background,
+    backgroundColor: StyleGuide.colors.backgroundDark,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -53,12 +56,12 @@ const styles = StyleSheet.create({
   // TODO: extract to text styles
   headerText: {
     fontWeight: '800',
-    color: StyleGuide.colors.brand,
+    color: StyleGuide.colors.brandDark,
     fontSize: 16,
   },
   contentContainer: {
     flex: 1,
-    backgroundColor: StyleGuide.colors.background,
+    backgroundColor: StyleGuide.colors.backgroundDark,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 100,
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
   // TODO: extract to text styles
   welcomeText: {
     fontWeight: '800',
-    color: StyleGuide.colors.brand,
+    color: StyleGuide.colors.brandLight,
     fontSize: 36,
     alignSelf: 'center',
   },
@@ -74,13 +77,13 @@ const styles = StyleSheet.create({
   primaryButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: StyleGuide.colors.brand,
+    backgroundColor: StyleGuide.colors.brandLight,
     borderRadius: 8,
     height: 75,
     width: 150,
     margin: 20,
     // Shadow
-    shadowColor: StyleGuide.colors.black,
+    shadowColor: StyleGuide.colors.brand,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
   },
   secondaryButtonText: {
     fontWeight: '800',
-    color: StyleGuide.colors.brand,
+    color: StyleGuide.colors.brandDark,
     fontSize: 16,
   },
 });

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Image,
+  Text,
 } from 'react-native';
 import Animated, {
   Value,
@@ -36,49 +37,6 @@ const deltaX = width / 2;
 const α = Math.PI / 12;
 const A = Math.round(width * Math.cos(α) + height * Math.sin(α));
 const snapPoints = [-A, 0, A];
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: StyleGuide.colors.background,
-    justifyContent: 'space-evenly',
-  },
-  // background: {
-  //   height: 560,
-  //   width: 500,
-  //   alignSelf: 'center',
-  //   marginVertical: 100,
-  // },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 16,
-  },
-  cards: {
-    flex: 1,
-    marginHorizontal: 16,
-    zIndex: 100,
-    // transform: [{ rotate: '90deg' }],
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    padding: 16,
-  },
-  // circle: {
-  //   width: 64,
-  //   height: 64,
-  //   borderRadius: 32,
-  //   padding: 12,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   backgroundColor: 'white',
-  //   shadowColor: 'gray',
-  //   shadowOffset: { width: 1, height: 1 },
-  //   shadowOpacity: 0.18,
-  //   shadowRadius: 2,
-  // },
-});
 
 interface ProfilesProps {
   cardsData: Profile[];
@@ -175,15 +133,59 @@ const Profiles = ({ profiles }: ProfilesProps) => {
         <Swipeable key={index} {...{ snapPoints, onSnap, x, y, offsetX }} />
       </View>
       <View style={styles.footer}>
-        {/* <RectButton style={styles.circle} onPress={() => dislike.setValue(1)}>
-          <Icon name="x" size={32} color="#ec5288" />
+        <RectButton style={styles.circle} onPress={() => dislike.setValue(1)}>
+          <Text>Shuffle</Text>
+          {/* <Icon name="x" size={32} color="#ec5288" /> */}
         </RectButton>
-        <RectButton style={styles.circle} onPress={() => like.setValue(1)}>
+        {/* <RectButton style={styles.circle} onPress={() => like.setValue(1)}>
           <Icon name="heart" size={32} color="#6ee3b4" />
         </RectButton> */}
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: StyleGuide.colors.backgroundDark,
+    justifyContent: 'space-evenly',
+  },
+  // background: {
+  //   height: 560,
+  //   width: 500,
+  //   alignSelf: 'center',
+  //   marginVertical: 100,
+  // },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 16,
+  },
+  cards: {
+    flex: 1,
+    marginHorizontal: 16,
+    zIndex: 100,
+    // transform: [{ rotate: '90deg' }],
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    padding: 16,
+  },
+  circle: {
+    width: 120,
+    height: 64,
+    borderRadius: 32,
+    padding: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    shadowColor: 'gray',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.18,
+    shadowRadius: 2,
+  },
+});
 
 export default Profiles;
