@@ -1,170 +1,62 @@
-import React, { Component } from 'react'
-import Swiper from 'react-native-deck-swiper'
-import { Button, StyleSheet, Text, View } from 'react-native'
+// TODO: Add drawer navigation
+// TODO: Add instructions as initial route
 
-// demo purposes only
-function * range (start, end) {
-  for (let i = start; i <= end; i++) {
-    yield i
-  }
-}
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default class Exemple extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      cards: [...range(1, 50)],
-      swipedAllCards: false,
-      swipeDirection: '',
-      cardIndex: 0
-    }
-  }
+import WelcomeScreen from '@@screens/Welcome';
+import Swipe from '@@screens/Swipe';
+import * as color from '@@utils/color';
 
-  renderCard = (card, index) => {
-    return (
-      <View style={styles.card}>
-        <Text style={styles.text}>{card} - {index}</Text>
-      </View>
-    )
-  };
+const InstructionsScreen = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Here are some instructions, tips, etc.</Text>
+    </View>
+  );
+};
 
-  onSwiped = (type) => {
-    console.log(`on swiped ${type}`)
-  }
+const DonateScreen = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Be awesome. Donate to 904ward and the Race Cards project!</Text>
+    </View>
+  );
+};
 
-  onSwipedAllCards = () => {
-    this.setState({
-      swipedAllCards: true
-    })
-  };
+const ShareScreen = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Share the experience...</Text>
+    </View>
+  );
+};
 
-  swipeLeft = () => {
-    this.swiper.swipeLeft()
-  };
+const Drawer = createDrawerNavigator();
 
-  render () {
-    return (
-      <View style={styles.container}>
-        <Swiper
-          ref={swiper => {
-            this.swiper = swiper
-          }}
-          onSwiped={() => this.onSwiped('general')}
-          onSwipedLeft={() => this.onSwiped('left')}
-          onSwipedRight={() => this.onSwiped('right')}
-          onSwipedTop={() => this.onSwiped('top')}
-          onSwipedBottom={() => this.onSwiped('bottom')}
-          onTapCard={this.swipeLeft}
-          cards={this.state.cards}
-          cardIndex={this.state.cardIndex}
-          cardVerticalMargin={80}
-          renderCard={this.renderCard}
-          onSwipedAll={this.onSwipedAllCards}
-          stackSize={3}
-          stackSeparation={15}
-          overlayLabels={{
-            bottom: {
-              title: 'BLEAH',
-              style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
-                wrapper: {
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }
-              }
-            },
-            left: {
-              title: 'NOPE',
-              style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
-                wrapper: {
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
-                  justifyContent: 'flex-start',
-                  marginTop: 30,
-                  marginLeft: -30
-                }
-              }
-            },
-            right: {
-              title: 'LIKE',
-              style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
-                wrapper: {
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
-                  marginTop: 30,
-                  marginLeft: 30
-                }
-              }
-            },
-            top: {
-              title: 'SUPER LIKE',
-              style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
-                wrapper: {
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }
-              }
-            }
-          }}
-          animateOverlayLabelsOpacity
-          animateCardOpacity
-          swipeBackCard
-        >
-          <Button onPress={() => this.swiper.swipeBack()} title='Swipe Back' />
-        </Swiper>
-      </View>
-    )
-  }
-}
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Welcome" component={WelcomeScreen} />
+        <Drawer.Screen name="Play Race Cards!" component={Swipe} />
+        <Drawer.Screen name="Instructions" component={InstructionsScreen} />
+        <Drawer.Screen name="Donate" component={DonateScreen} />
+        <Drawer.Screen name="Share" component={ShareScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
-  },
-  card: {
-    flex: 1,
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: '#E8E8E8',
+    backgroundColor: color.background,
     justifyContent: 'center',
-    backgroundColor: 'white'
+    alignItems: 'center',
   },
-  text: {
-    textAlign: 'center',
-    fontSize: 50,
-    backgroundColor: 'transparent'
-  },
-  done: {
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'white',
-    backgroundColor: 'transparent'
-  }
-})
+});
+
+export default App;
