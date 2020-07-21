@@ -38,3 +38,28 @@ Start the bundler (it needs to remain running whenever you are running the app)
 Then build android:
 
 `yarn android`
+
+## Tools/Tech Used in this repo
+
+We use a variety of useful tools to speed up development of a stable and easy-to-use app. But, sometimes it can seem like magic is going on if you don't know what the tools are and why they are used. We want to make this as inclusive of a project as we can, so below you will find an outline of the tools used in this project.
+
+### Fundamentals
+
+#### Code / UI
+
+-- React Native
+
+-- Typescript
+
+-- React Navigation
+
+-- Reanimated
+
+#### CI / (C)D
+
+-- Github Actions
+
+-- Fastlane
+
+-- Codepush
+
