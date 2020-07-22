@@ -1,8 +1,12 @@
 import * as React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 import * as cards from '@@assets/cards';
+import StyleGuide from '@@utils/styleguide';
+
 import { Profile } from './Profile';
 import Profiles from './Profiles';
+import { FocusAwareStatusBar } from '../../../App';
 
 export const cardsData: Profile[] = [
   {
@@ -64,7 +68,18 @@ export const cardsData: Profile[] = [
 ];
 
 const Swipe = () => {
-  return <Profiles {...{ cardsData }} />;
+  return (
+    <SafeAreaView style={styles.container}>
+      <FocusAwareStatusBar barStyle="light-content" />
+      <Profiles {...{ cardsData }} />
+    </SafeAreaView>
+  );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: StyleGuide.colors.backgroundDark,
+  },
+});
 export default Swipe;

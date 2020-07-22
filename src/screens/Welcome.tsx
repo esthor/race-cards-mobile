@@ -4,23 +4,22 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
+  SafeAreaView, 
 } from 'react-native';
 
 import StyleGuide from '@@utils/styleguide';
-import DrawerButton from '@@components/nav/DrawerButton';
+
+import { FocusAwareStatusBar } from '../../App';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-        style={styles.header}
-        onPress={() => navigation.openDrawer()}>
-        <Text style={styles.headerText}>{'<- Swipe here to navigate'}</Text>
-      </TouchableOpacity>
+      <FocusAwareStatusBar barStyle="light-content" />
       <View style={styles.contentContainer}>
-        <Text style={styles.welcomeText}>Welcome to</Text>
-        <Text style={styles.welcomeText}>Race Cards!</Text>
+        <View>
+          <Text style={styles.welcomeText}>Welcome to Race Cards</Text>
+          {/* <Text style={styles.welcomeText}>Race Cards!</Text> */}
+        </View>
         <TouchableOpacity
           style={styles.primaryButton}
           onPress={() => navigation.navigate('Play Race Cards!')}>
@@ -42,27 +41,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: StyleGuide.colors.backgroundDark,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: '100%',
-    marginLeft: 20,
-    marginTop: 30,
-  },
-  // TODO: extract to text styles
-  headerText: {
-    fontWeight: '800',
-    color: StyleGuide.colors.brandDark,
-    fontSize: 16,
   },
   contentContainer: {
     flex: 1,
     backgroundColor: StyleGuide.colors.backgroundDark,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     marginBottom: 100,
   },
@@ -83,7 +68,7 @@ const styles = StyleSheet.create({
     width: 150,
     margin: 20,
     // Shadow
-    shadowColor: StyleGuide.colors.brand,
+    shadowColor: StyleGuide.colors.brandLight,
     shadowOffset: {
       width: 0,
       height: 2,

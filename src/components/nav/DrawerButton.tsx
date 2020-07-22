@@ -1,34 +1,30 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-import StyleGuide from '@@utils/styleguide';
+import { hamburger } from '@@assets/icons';
 
-const DrawerButton = ({ navigation }) => {
+const DrawerButton = ({ onPress }) => {
   return (
     <>
-      <TouchableOpacity
-        style={styles.header}
-        onPress={() => navigation.openDrawer()}>
-        <Text style={styles.headerText}>{'<- Swipe here to navigate'}</Text>
+      <TouchableOpacity style={styles.button} onPress={() => onPress()}>
+        <Image source={hamburger} style={styles.icon} />
       </TouchableOpacity>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: '100%',
-    marginLeft: 20,
-    marginTop: 30,
+  button: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 30,
+    width: 40,
   },
   // TODO: extract to text styles
-  headerText: {
-    fontWeight: '800',
-    color: StyleGuide.colors.brandDark,
-    fontSize: 16,
+  icon: {
+    height: 26,
+    width: 26,
   },
 });
 
