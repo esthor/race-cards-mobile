@@ -4,10 +4,11 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView, 
+  SafeAreaView,
 } from 'react-native';
 
 import StyleGuide from '@@utils/styleguide';
+import Button from '@@components/Button';
 
 import { FocusAwareStatusBar } from '../../App';
 
@@ -16,15 +17,16 @@ const WelcomeScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <FocusAwareStatusBar barStyle="light-content" />
       <View style={styles.contentContainer}>
-        <View>
+        {/* <View>
           <Text style={styles.welcomeText}>Welcome to Race Cards</Text>
-          {/* <Text style={styles.welcomeText}>Race Cards!</Text> */}
+        </View> */}
+        <View style={styles.buttonContainer}>
+          <Button
+            label="Play Now"
+            primary
+            onPress={() => navigation.navigate('Play Race Cards!')}
+          />
         </View>
-        <TouchableOpacity
-          style={styles.primaryButton}
-          onPress={() => navigation.navigate('Play Race Cards!')}>
-          <Text style={styles.primaryButtonText}>Get Started</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.secondaryButton}
           onPress={() => navigation.navigate('Instructions')}>
@@ -51,62 +53,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 100,
   },
-  // TODO: extract to text styles
-  welcomeText: {
-    fontWeight: '800',
-    color: StyleGuide.colors.brandLight,
-    fontSize: 36,
-    alignSelf: 'center',
+  buttonContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   // TODO: extract a generic button style/component
-  primaryButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: StyleGuide.colors.brandLight,
-    borderRadius: 8,
-    height: 75,
-    width: 150,
-    margin: 20,
-    // Shadow
-    shadowColor: StyleGuide.colors.brandLight,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-  },
-  primaryButtonText: {
-    fontWeight: '800',
-    // TODO: brand colors
-    color: StyleGuide.colors.white,
-    fontSize: 22,
-  },
   secondaryButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    // TODO: brand colors
-    backgroundColor: StyleGuide.colors.gray,
-    borderRadius: 8,
-    height: 35,
-    width: 300,
-    opacity: 0.8,
-    // Shadow
-    shadowColor: StyleGuide.colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
   },
   secondaryButtonText: {
     fontWeight: '800',
-    color: StyleGuide.colors.brandDark,
+    color: StyleGuide.colors.brandSecondary,
     fontSize: 16,
   },
 });

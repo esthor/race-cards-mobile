@@ -1,16 +1,18 @@
 import React, { ReactNode } from 'react';
 import { TextProps as OriginalTextProps, Text as RNText } from 'react-native';
 
-import StyleGuide from './StyleGuide';
+import StyleGuide from '@@utils/styleguide';
 
 export interface TextProps extends OriginalTextProps {
-  dark?: boolean;
+  // colored?: boolean;
   type?: keyof typeof StyleGuide['typography'];
   children: ReactNode;
 }
 
-const Text = ({ dark, type, style, children }: TextProps) => {
-  const color = dark ? 'white' : 'black';
+const Text = ({ type, style, children }: TextProps) => {
+  const { brandSecondary, white } = StyleGuide.colors;
+  const color = type === 'secondaryButton' ? brandSecondary : white; // hacky af
+  console.log(color);
   return (
     <RNText style={[StyleGuide.typography[type || 'body'], { color }, style]}>
       {children}

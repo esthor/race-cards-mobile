@@ -21,12 +21,12 @@ import Animated, {
   clockRunning,
   call,
 } from 'react-native-reanimated';
-// import { Feather as Icon } from "@expo/vector-icons";
 import { useMemoOne } from 'use-memo-one';
 import { RectButton } from 'react-native-gesture-handler';
 
 import { timing } from '@@components';
 import StyleGuide from '@@utils/styleguide';
+import Button from '@@components/Button';
 
 import Card, { Profile } from './Profile';
 import Swipeable from './Swipeable';
@@ -44,13 +44,12 @@ interface ProfilesProps {
 
 const Profiles = ({ profiles }: ProfilesProps) => {
   const [index, setIndex] = useState(0);
-  const { x, y, offsetX, like, dislike } = useMemoOne(
+  const { x, y, offsetX, swipe } = useMemoOne(
     () => ({
       x: new Value(0),
       y: new Value(0),
       offsetX: new Value(0),
-      like: new Value(0) as Animated.Value<0 | 1>,
-      dislike: new Value(0) as Animated.Value<0 | 1>,
+      swipe: new Value(0) as Animated.Value<0 | 1>,
     }),
     [],
   );
@@ -86,7 +85,7 @@ const Profiles = ({ profiles }: ProfilesProps) => {
   useCode(
     () =>
       block([
-        cond(dislike, [
+        cond(swipe, [
           set(
             offsetX,
             timing({
@@ -95,34 +94,15 @@ const Profiles = ({ profiles }: ProfilesProps) => {
               to: -A,
             }),
           ),
-          cond(not(clockRunning(clock)), [set(dislike, 0), call([], onSnap)]),
-        ]),
-        cond(like, [
-          set(
-            offsetX,
-            timing({
-              clock,
-              from: offsetX,
-              to: A,
-            }),
-          ),
-          cond(not(clockRunning(clock)), [set(like, 0), call([], onSnap)]),
+          cond(not(clockRunning(clock)), [set(swipe, 0), call([], onSnap)]),
         ]),
       ]),
-    [dislike, offsetX, clock, onSnap, like],
+    [swipe, offsetX, clock, onSnap],
   );
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        {/* <Icon name="user" size={32} color="gray" />
-        <Icon name="message-circle" size={32} color="gray" /> */}
-      </View>
+      <View style={styles.header}></View>
       <View style={styles.cards}>
-        {/* <Image
-          source={require('../assets/cards/old/1.jpg')}
-          resizeMode="contain"
-          style={styles.background}
-        /> */}
         <Animated.View
           style={{
             ...StyleSheet.absoluteFillObject,
@@ -133,13 +113,7 @@ const Profiles = ({ profiles }: ProfilesProps) => {
         <Swipeable key={index} {...{ snapPoints, onSnap, x, y, offsetX }} />
       </View>
       <View style={styles.footer}>
-        <RectButton style={styles.circle} onPress={() => dislike.setValue(1)}>
-          <Text>Shuffle</Text>
-          {/* <Icon name="x" size={32} color="#ec5288" /> */}
-        </RectButton>
-        {/* <RectButton style={styles.circle} onPress={() => like.setValue(1)}>
-          <Icon name="heart" size={32} color="#6ee3b4" />
-        </RectButton> */}
+        <Button label="Shuffle" primary onPress={() => swipe.setValue(1)} />
       </View>
     </SafeAreaView>
   );
@@ -151,12 +125,6 @@ const styles = StyleSheet.create({
     backgroundColor: StyleGuide.colors.backgroundDark,
     justifyContent: 'space-evenly',
   },
-  // background: {
-  //   height: 560,
-  //   width: 500,
-  //   alignSelf: 'center',
-  //   marginVertical: 100,
-  // },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -166,25 +134,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 16,
     zIndex: 100,
-    // transform: [{ rotate: '90deg' }],
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     padding: 16,
-  },
-  circle: {
-    width: 120,
-    height: 64,
-    borderRadius: 32,
-    padding: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    shadowColor: 'gray',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.18,
-    shadowRadius: 2,
   },
 });
 

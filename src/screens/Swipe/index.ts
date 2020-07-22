@@ -1,1 +1,1 @@
-export { default, profiles } from "./Swipe";
+export { default, profiles } from './Swipe';

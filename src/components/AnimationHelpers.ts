@@ -20,9 +20,9 @@ import Animated, {
   neq,
   set,
   defined,
-} from "react-native-reanimated";
-import { State } from "react-native-gesture-handler";
-import { min } from "react-native-redash";
+} from 'react-native-reanimated';
+import { State } from 'react-native-gesture-handler';
+import { min } from 'react-native-redash';
 
 export interface TimingProps {
   clock?: Animated.Clock;
@@ -81,7 +81,7 @@ interface PrivateSpringConfig extends Animated.SpringConfig {
   toValue: Animated.Value<number>;
 }
 
-type SpringConfig = Omit<Animated.SpringConfig, "toValue">;
+type SpringConfig = Omit<Animated.SpringConfig, 'toValue'>;
 
 export interface WithSpringParams {
   value: Animated.Adaptable<number>;
@@ -96,7 +96,7 @@ export interface WithSpringParams {
 export const snapPoint = (
   value: Animated.Adaptable<number>,
   velocity: Animated.Adaptable<number>,
-  points: Animated.Adaptable<number>[]
+  points: Animated.Adaptable<number>[],
 ) => {
   const point = add(value, multiply(0.2, velocity));
   const diffPoint = (p: Animated.Adaptable<number>) => abs(sub(point, p));
@@ -104,7 +104,7 @@ export const snapPoint = (
   const minDelta = min(...deltas);
   return points.reduce(
     (acc, p) => cond(eq(diffPoint(p), minDelta), p, acc),
-    new Value()
+    new Value(),
   );
 };
 
@@ -164,7 +164,7 @@ export const withSpring = (props: WithSpringParams) => {
         set(springState.time, 0),
         set(
           config.toValue,
-          snapPoint(springState.position, velocity, snapPoints)
+          snapPoint(springState.position, velocity, snapPoints),
         ),
         startClock(clock),
       ]),
@@ -188,7 +188,7 @@ export const withOffset = ({
   return block([
     cond(
       not(defined(safeOffset)),
-      set(safeOffset, offset === undefined ? 0 : offset)
+      set(safeOffset, offset === undefined ? 0 : offset),
     ),
     cond(eq(gestureState, State.ACTIVE), add(safeOffset, value), [
       set(safeOffset, add(safeOffset, value)),
@@ -200,7 +200,7 @@ export const withTransition = (
   value: Animated.Node<number>,
   velocity: Animated.Value<number>,
   gestureState: Animated.Value<State> = new Value(State.UNDETERMINED),
-  springConfig?: Partial<Omit<Animated.SpringConfig, "toValue">>
+  springConfig?: Partial<Omit<Animated.SpringConfig, 'toValue'>>,
 ) => {
   const clock = new Clock();
   const state = {
@@ -225,7 +225,7 @@ export const withTransition = (
     cond(
       eq(gestureState, State.ACTIVE),
       [set(state.velocity, velocity), set(state.position, value)],
-      reSpring(clock, state, config)
+      reSpring(clock, state, config),
     ),
     state.position,
   ]);

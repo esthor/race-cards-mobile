@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import StyleGuide from './StyleGuide';
+import StyleGuide from '@@utils/styleguide';
 import Text from './Text';
 
 interface ButtonProps {
@@ -11,29 +10,40 @@ interface ButtonProps {
   onPress: () => void;
 }
 
+const Button = ({ label, primary, onPress }: ButtonProps) => {
+  const { brandSecondary, white } = StyleGuide.colors;
+  const color = primary ? white : brandSecondary;
+  const backgroundColor = primary ? StyleGuide.colors.brandDark : undefined;
+  const buttonType = primary ? 'button' : 'secondaryButton';
+  return (
+    <TouchableOpacity
+      style={[styles.container, { backgroundColor }]}
+      onPress={() => onPress()}>
+      <Text type={buttonType} style={[styles.label, { color }]}>
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     padding: StyleGuide.spacing * 2,
+    borderRadius: StyleGuide.spacing,
+    // Shadow
+    // shadowColor: StyleGuide.colors.brandLight,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+
+    // elevation: 5,
   },
   label: {
     textAlign: 'center',
   },
 });
-
-const Button = ({ label, primary, onPress }: ButtonProps) => {
-  const color = primary ? 'white' : undefined;
-  const backgroundColor = primary ? StyleGuide.palette.primary : undefined;
-  return (
-    <RectButton {...{ onPress }}>
-      <SafeAreaView style={{ backgroundColor }} accessible>
-        <View style={styles.container}>
-          <Text type="headline" style={[styles.label, { color }]}>
-            {label}
-          </Text>
-        </View>
-      </SafeAreaView>
-    </RectButton>
-  );
-};
 
 export default Button;
