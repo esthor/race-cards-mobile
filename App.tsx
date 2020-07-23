@@ -16,6 +16,7 @@ import InstructionsScreen from '@@screens/Instructions';
 import DonateScreen from '@@screens/Donate';
 import ShareScreen from '@@screens/Share';
 import Swipe from '@@screens/Swipe';
+import FeedbackScreen from '@@screens/Feedback';
 import StyleGuide from '@@utils/styleguide';
 import DrawerButton from '@@components/nav/DrawerButton';
 
@@ -36,6 +37,7 @@ const PlayStack = createStackNavigator();
 const InstructionsStack = createStackNavigator();
 const DonateStack = createStackNavigator();
 const ShareStack = createStackNavigator();
+const FeedbackStack = createStackNavigator();
 
 const Welcome = ({ navigation }) => {
   return (
@@ -124,6 +126,35 @@ const Instructions = ({ navigation }) => {
     </InstructionsStack.Navigator>
   );
 };
+const Feedback = ({ navigation }) => {
+  return (
+    <FeedbackStack.Navigator
+      screenOptions={{
+        // TODO: This header styling should be shared, not repeated
+        headerStyle: {
+          backgroundColor: StyleGuide.colors.backgroundDark,
+          shadowColor: 'transparent', // Remove react navigation's default bottom hairline border
+        },
+        headerTintColor: StyleGuide.colors.white,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 32,
+        },
+      }}>
+      <FeedbackStack.Screen
+        name="Feedback"
+        component={FeedbackScreen}
+        options={{
+          headerLeft: () => (
+            <DrawerButton
+              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+            />
+          ),
+        }}
+      />
+    </FeedbackStack.Navigator>
+  );
+};
 const Donate = ({ navigation }) => {
   return (
     <DonateStack.Navigator
@@ -193,7 +224,7 @@ const App = () => {
           gestureEnabled: true,
         }}
         drawerContentOptions={{
-          activeTintColor: StyleGuide.colors.brandDark,
+          activeTintColor: StyleGuide.colors.brandPurple,
           activeBackgroundColor: StyleGuide.colors.backgroundLight,
           inactiveTintColor: StyleGuide.colors.backgroundLight,
 
@@ -205,6 +236,7 @@ const App = () => {
         <Drawer.Screen name="Instructions" component={Instructions} />
         <Drawer.Screen name="Donate" component={Donate} />
         <Drawer.Screen name="Share" component={Share} />
+        <Drawer.Screen name="Feedback" component={Feedback} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

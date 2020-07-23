@@ -6,7 +6,8 @@ const StyleGuide = {
     backgroundDark: '#19191D',
     brandLight: '#FF4E5E', // This is more accessible, let's see how it works.
     // brandLight: '#C596B8', // This is more accessible, let's see how it works.
-    brandDark: '#A748F9', // This is more accessible, let's see how it works.
+    brandDark: '#AA4353', // This is more accessible, let's see how it works.
+    brandPurple: '#A748F9', // This is more accessible, let's see how it works.
     // brandDark: '#7A4375', // This is more accessible, let's see how it works.
     // brand: '#7a305c',
     brandSecondary: '#FF8651',
@@ -17,7 +18,8 @@ const StyleGuide = {
   typography: {
     body: {
       fontSize: 17,
-      lineHeight: 20,
+      lineHeight: 25,
+      fontWeight: '500',
     },
     button: {
       fontWeight: '700',
@@ -42,6 +44,10 @@ pulling inspiration from firefox https://i.gzn.jp/img/2019/07/10/firefox-68/00.j
 #FF8651 - "Coral"
 #A748F9 - "Lavender Indigo"
 #21123B - "Haiti" (dark purple)
+--
+#F49150
+#C34C58
+#AA4353
 */
 
 export default StyleGuide;

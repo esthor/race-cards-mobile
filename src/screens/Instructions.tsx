@@ -12,7 +12,6 @@ const InstructionsScreen = () => {
     <SafeAreaView style={styles.container}>
       <FocusAwareStatusBar barStyle="light-content" />
       <View style={styles.contentContainer}>
-        <Text type="header">The Race Cards Instructions</Text>
         <Text>
           Gather a group of friends, family, colleagues, neighbors, and anyone
           you know (or don’t!). The Race Cards are designed to promote
@@ -42,7 +41,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingTop: StyleGuide.spacing * 3,
+    paddingTop: StyleGuide.spacing * 5,
+    paddingHorizontal: StyleGuide.spacing * 2,
   },
 });
 
